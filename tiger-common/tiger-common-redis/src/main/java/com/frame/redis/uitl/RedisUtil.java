@@ -1,19 +1,12 @@
 package com.frame.redis.uitl;
 
 
-import com.alibaba.fastjson2.JSON;
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
-import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Component;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -23,23 +16,6 @@ public class RedisUtil {
     private RedisTemplate<String, Object> redisTemplate;
 
     private static final String CACHE_KEY_SEPARATOR = ".";
-
-    private DefaultRedisScript<Boolean> casScript;
-
-    private DefaultRedisScript<Long> unlockScript;
-
-    @PostConstruct
-    public void init() {
-        casScript = new DefaultRedisScript<>();
-        casScript.setResultType(Boolean.class);
-        casScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("compareAndSet.lua")));
-        log.info("CAS script initialized: {}", JSON.toJSON(casScript));
-
-        unlockScript = new DefaultRedisScript<>();
-        unlockScript.setResultType(Long.class);
-        unlockScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("unlock.lua")));
-        log.info("Unlock script initialized: {}", JSON.toJSON(unlockScript));
-    }
 
     /**
      * 设置缓存值
@@ -91,33 +67,6 @@ public class RedisUtil {
      */
     public boolean delete(String key) {
         return Boolean.TRUE.equals(redisTemplate.delete(key));
-    }
-
-    /**
-     * 比较并设置（CAS），仅当旧值匹配时才更新为新值
-     *
-     * @param key      缓存键
-     * @param oldValue 期望的旧值
-     * @param newValue 新值
-     * @return true 表示 CAS 成功，false 表示旧值不匹配
-     */
-    public boolean compareAndSet(String key, Long oldValue, Long newValue) {
-        List<String> keys = Collections.singletonList(key);
-        return Boolean.TRUE.equals(redisTemplate.execute(casScript, keys, oldValue, newValue));
-    }
-
-    /**
-     * 仅在键不存在时设置值，并指定过期时间
-     *
-     * @param key      缓存键
-     * @param value    缓存值
-     * @param timeout  过期时间数值
-     * @param timeUnit 时间单位
-     * @param <T>      值类型
-     * @return true 表示设置成功，false 表示键已存在
-     */
-    public <T> boolean setIfAbsent(String key, T value, long timeout, TimeUnit timeUnit) {
-        return Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(key, value, timeout, timeUnit));
     }
 
     /**
@@ -232,17 +181,5 @@ public class RedisUtil {
         return redisTemplate.opsForZSet().rank(key, member);
     }
 
-    /**
-     * 原子解锁：仅当键值与请求标识匹配时才删除键
-     *
-     * @param key       锁键
-     * @param requestId 请求标识
-     * @return true 表示解锁成功，false 表示键不存在或标识不匹配
-     */
-    public boolean unlock(String key, String requestId) {
-        List<String> keys = Collections.singletonList(key);
-        Long result = redisTemplate.execute(unlockScript, keys, requestId);
-        return result != null && result > 0;
-    }
 
 }

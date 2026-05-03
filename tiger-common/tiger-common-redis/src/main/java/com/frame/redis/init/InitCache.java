@@ -1,4 +1,5 @@
 package com.frame.redis.init;
+
 import com.frame.redis.uitl.SpringContextUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
@@ -15,10 +16,10 @@ public class InitCache implements CommandLineRunner {
         ApplicationContext applicationContext = SpringContextUtil.getApplicationContext();
         Map<String, AbstractCache> beanMap = applicationContext.getBeansOfType(AbstractCache.class);
         //调用init方法
-        if(beanMap.isEmpty()){
+        if (beanMap.isEmpty()) {
             return;
         }
-        for(Map.Entry<String,AbstractCache> entry : beanMap.entrySet()){
+        for (Map.Entry<String, AbstractCache> entry : beanMap.entrySet()) {
             AbstractCache abstractCache = (AbstractCache) SpringContextUtil.getBean(entry.getValue().getClass());
             abstractCache.initCache();
         }
