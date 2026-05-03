@@ -54,6 +54,7 @@
         <rocketmq.version>3.0.1</rocketmq.version> <!-- 官方兼容SpringBoot3 -->
         <rabbitmq.version>3.2.5</rabbitmq.version>
         <mongodb.version>4.1.1</mongodb.version>
+        <redisson.version>3.23.3</redisson.version>
     </properties>
 
     <!-- 全局默认依赖 -->
@@ -107,6 +108,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring.boot.starter.version}</version>
+            </dependency>
+            <!-- Redisson 分布式锁核心依赖 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version> <!-- 推荐使用稳定版，可根据Spring Boot版本适配 -->
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>

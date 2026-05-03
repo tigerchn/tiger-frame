@@ -6,4 +6,7 @@ public class ShareLockException extends RuntimeException {
         super(message);
     }
 
+    public ShareLockException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
