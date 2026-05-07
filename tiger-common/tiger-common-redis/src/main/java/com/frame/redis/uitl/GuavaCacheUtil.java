@@ -23,7 +23,7 @@ public class GuavaCacheUtil<K, V> {
     @Value("${guava.cache.switch}")
     public Boolean switchCache;
 
-    private Cache<String, String> localCache =
+    private final Cache<String, String> localCache =
             CacheBuilder.newBuilder()
                     .maximumSize(5000)
                     .expireAfterWrite(3, TimeUnit.SECONDS)

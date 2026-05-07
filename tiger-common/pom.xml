@@ -18,6 +18,7 @@
     <modules>
         <module>tiger-common-mybatis-plus</module>
         <module>tiger-common-redis</module>
+        <module>tiger-common-log</module>
     </modules>
 
     <properties>
