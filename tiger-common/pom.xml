@@ -19,6 +19,8 @@
         <module>tiger-common-mybatis-plus</module>
         <module>tiger-common-redis</module>
         <module>tiger-common-log</module>
+        <module>tiger-common-knife4j</module>
+        <module>tiger-common-web</module>
     </modules>
 
     <properties>
@@ -33,6 +35,30 @@
             <dependency>
                 <groupId>com.frame</groupId>
                 <artifactId>tiger-common-mybatis-plus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-knife4j</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

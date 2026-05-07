@@ -10,6 +10,7 @@
     <modules>
         <module>tiger-common</module>
         <module>tiger-dependencies</module>
+        <module>tiger-demo</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 

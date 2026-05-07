@@ -1,0 +1,24 @@
+# 开发环境 —— 全开、方便调试
+knife4j:
+  production: false
+  title: 企业系统API文档【开发环境】
+  description: 开发环境接口文档，包含所有模块
+  version: v1.0.0
+  contact:
+    name: 研发组
+    email: dev@company.com
+    url: http://dev.company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  servers:
+    - url: /
+      desc: 本地开发环境
+    - url: http://localhost:${server.port}
+      desc: 本机调试
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

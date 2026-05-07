@@ -1,0 +1,24 @@
+# 测试环境 —— 带密码访问
+knife4j:
+  production: false
+  title: 企业系统API文档【测试环境】
+  description: 测试环境接口文档
+  version: v1.0.0
+  contact:
+    name: 测试组
+    email: test@company.com
+    url: http://test.company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  servers:
+    - url: https://api-test.company.com
+      desc: 测试环境
+  basic:
+    enable: true
+    username: testadmin
+    password: Test@123456
+
+springdoc:
+  api-docs:
+    enabled: true

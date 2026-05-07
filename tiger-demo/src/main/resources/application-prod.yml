@@ -1,0 +1,23 @@
+# 生产环境 —— 安全锁死
+knife4j:
+  enable: false
+  production: true
+  title: 生产环境不可访问
+  description: 生产环境已关闭接口文档
+  version: disabled
+  contact:
+    name: 无
+    email: 无
+    url: 无
+  license:
+    name: 无
+    url: 无
+  servers:
+    - url: /
+      desc: 生产环境已关闭接口文档
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
