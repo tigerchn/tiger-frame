@@ -52,7 +52,6 @@
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version> <!-- SpringBoot3使用jakarta.validation -->
         <jakarta.mail.version>2.0.1</jakarta.mail.version> <!-- jakarta.mail 替代 javax.mail -->
         <angus.activation.version>2.0.2</angus.activation.version>
-        <rocketmq.version>3.0.1</rocketmq.version> <!-- 官方兼容SpringBoot3 -->
         <rabbitmq.version>3.2.5</rabbitmq.version>
         <mongodb.version>4.1.1</mongodb.version>
         <redisson.version>3.23.3</redisson.version>
@@ -270,13 +269,6 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
-            </dependency>
-
-            <!-- 消息队列 -->
-            <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-spring-boot-starter</artifactId>
-                <version>${rocketmq.version}</version>
             </dependency>
 
             <!-- 测试 -->

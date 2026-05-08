@@ -24,6 +24,7 @@
         <module>tiger-common-tool</module>
         <module>tiger-common-mail</module>
         <module>tiger-common-job</module>
+        <module>tiger-common-mq</module>
     </modules>
 
     <properties>
