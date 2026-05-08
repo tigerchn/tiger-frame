@@ -25,6 +25,7 @@
         <module>tiger-common-mail</module>
         <module>tiger-common-job</module>
         <module>tiger-common-mq</module>
+        <module>tiger-common-test</module>
     </modules>
 
     <properties>
