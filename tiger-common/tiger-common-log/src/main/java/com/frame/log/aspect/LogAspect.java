@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 @Component
-@ConditionalOnProperty(name = {"log.aspect.enable"}, havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = {"tiger.log.aspect"}, havingValue = "true", matchIfMissing = true)
 public class LogAspect {
 
     @Pointcut("execution(* com.frame..*.controller.*Controller.*(..)) || execution(* com.frame..*.service.*Service.*(..))")

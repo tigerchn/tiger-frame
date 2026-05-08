@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@ConfigurationProperties(prefix = "knife4j")
+@ConfigurationProperties(prefix = "tiger.knife4j")
 @Data
 public class Knife4JavaProperties {
 

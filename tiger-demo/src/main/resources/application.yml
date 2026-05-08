@@ -10,25 +10,25 @@ spring:
   profiles:
     active: ${env-flag} # 默认启动开发环境
 
-
-# 全局 Knife4j 基础配置
-knife4j:
-  enable: true
-  setting:
-    language: zh_cn
-    enable-swagger-models: true
-    enable-document-manage: true
-    enable-version: true
-
 springdoc:
   api-docs:
     path: /v3/api-docs
   paths-to-exclude: /actuator/**, /error/**
 
 tiger:
-  smtpHost: smtp.mxhichina.com
-  smtpPort: 465
-  smtpUser:
-  smtpPwd:
-  senderName: tiger
-  smtpSslEnable: true
+  knife4j:
+    enable: true
+    setting:
+      language: zh_cn
+      enable-swagger-models: true
+      enable-document-manage: true
+      enable-version: true
+  mail:
+    smtpHost: smtp.mxhichina.com
+    smtpPort: 465
+    smtpUser:
+    smtpPwd:
+    senderName: tiger
+    smtpSslEnable: true
+  log:
+    aspect: true
