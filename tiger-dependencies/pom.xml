@@ -45,7 +45,7 @@
         <http.client.version>5.3.1</http.client.version>
         <junit.version>5.10.2</junit.version> <!-- SpringBoot3默认使用Junit5 -->
         <archunit.version>1.2.1</archunit.version>
-        <xxl.job.version>2.4.1</xxl.job.version> <!-- 兼容SpringBoot3 -->
+        <xxl.job.version>2.4.0</xxl.job.version> <!-- 兼容SpringBoot3 -->
         <easyexcel.version>3.3.2</easyexcel.version>
         <poi.version>5.2.5</poi.version>
         <oss.version>3.17.4</oss.version>
@@ -191,11 +191,6 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>${gson.version}</version>
             </dependency>
 
             <!-- 序列化/对象映射 -->

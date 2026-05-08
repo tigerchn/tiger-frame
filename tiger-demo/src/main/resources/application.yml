@@ -32,3 +32,12 @@ tiger:
     smtpSslEnable: true
   log:
     aspect: true
+  job:
+    adminAddresses: http://117.78.51.210:9000/xxl-job-admin
+    accessToken: default_token
+    appName: ape-frame
+    address: xx
+    ip: 127.0.0.1
+    port: 9999
+    logPath: /data/applogs/xxl-job/jobhandler
+    logRetentionDays: 30
