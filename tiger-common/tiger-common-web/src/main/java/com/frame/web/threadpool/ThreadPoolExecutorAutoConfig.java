@@ -1,7 +1,6 @@
 package com.frame.web.threadpool;
 
 import com.frame.web.threadpool.impl.TraceIdTaskDecorator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,12 +12,8 @@ import java.util.List;
 @ConditionalOnClass(ThreadPoolTaskExecutor.class)
 public class ThreadPoolExecutorAutoConfig {
 
-
-    @Autowired(required = false)
-    private List<ThreadPoolTaskDecorator> threadTaskDecorators;
-
-    @Bean
-    public ThreadPoolExecutorBuilder threadPoolTaskExecutorBuilder() {
+    @Bean("customThreadPoolTaskExecutorBuilder")
+    public ThreadPoolExecutorBuilder threadPoolTaskExecutorBuilder(List<ThreadPoolTaskDecorator> threadTaskDecorators) {
         return new ThreadPoolExecutorBuilder(threadTaskDecorators);
     }
 
