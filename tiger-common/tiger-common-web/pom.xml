@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>tiger-common-web</artifactId>
+    <packaging>jar</packaging>
+    <description>Common Web Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-job</artifactId>
     <packaging>jar</packaging>
+    <description>Common Job Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

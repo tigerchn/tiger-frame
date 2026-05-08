@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-mq</artifactId>
     <packaging>jar</packaging>
+    <description>Common Message Queue Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

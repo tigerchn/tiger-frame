@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-tool</artifactId>
     <packaging>jar</packaging>
+    <description>Common Tool Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

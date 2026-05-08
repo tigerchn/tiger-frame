@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-mail</artifactId>
     <packaging>jar</packaging>
+    <description>Common Mail Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>tiger-common-knife4j</artifactId>
+    <packaging>jar</packaging>
+    <description>Common Knife4j Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

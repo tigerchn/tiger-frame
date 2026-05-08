@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-log</artifactId>
     <packaging>jar</packaging>
+    <description>Common Log Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

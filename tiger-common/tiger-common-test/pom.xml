@@ -11,6 +11,7 @@
 
     <artifactId>tiger-common-test</artifactId>
     <packaging>jar</packaging>
+    <description>Common Test Module</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
