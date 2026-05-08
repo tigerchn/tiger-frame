@@ -38,7 +38,7 @@
         <mybatis.plus.version>3.5.5</mybatis.plus.version> <!-- 兼容SpringBoot3 -->
         <disruptor.version>3.4.4</disruptor.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <gson.version>2.10.1</gson.version>
+
         <freemarker.version>2.3.32</freemarker.version>
         <guava.version>32.1.3-jre</guava.version>
         <fastjson.version>2.0.32</fastjson.version> <!-- Fastjson1.x不兼容SpringBoot3，升级为2.x -->

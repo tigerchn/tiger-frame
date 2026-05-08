@@ -13,9 +13,9 @@ knife4j:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   servers:
     - url: /
-      desc: 本地开发环境
+      description: 本地开发环境
     - url: http://localhost:${server.port}
-      desc: 本机调试
+      description: 本机调试
 
 springdoc:
   api-docs:
