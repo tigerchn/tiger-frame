@@ -7,11 +7,13 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.region.Region;
 import com.frame.tool.storage.cos.properties.CosProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
+@ConditionalOnProperty(prefix = "tencent.cos", name = "enabled", havingValue = "true")
 public class CosConfig {
 
     private final CosProperties cosProperties;
