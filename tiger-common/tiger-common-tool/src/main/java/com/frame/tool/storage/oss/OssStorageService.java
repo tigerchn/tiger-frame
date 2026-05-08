@@ -1,13 +1,13 @@
-package com.frame.tool.storage.cos;
+package com.frame.tool.storage.oss;
 
-import com.frame.tool.storage.cos.properties.CosProperties;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.model.*;
+import com.frame.tool.storage.StorageService;
+import com.frame.tool.storage.oss.properties.OssProperties;
 import com.frame.tool.uuid.IdUtil;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,10 +20,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CosUtil {
+@ConditionalOnProperty(prefix = "aliyun.oss", name = "enabled", havingValue = "true")
+public class OssStorageService implements StorageService {
 
-    private final CosProperties properties;
-    private final COSClient cosClient;
+    private final OssProperties properties;
+    private final OSS ossClient;
 
     // ====================== 上传 MultipartFile ======================
     public String upload(MultipartFile file) {
@@ -32,10 +33,10 @@ public class CosUtil {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(file.getContentType());
 
-            cosClient.putObject(properties.getBucketName(), fileName, inputStream, metadata);
+            ossClient.putObject(properties.getBucketName(), fileName, inputStream, metadata);
             return getFileUrl(fileName);
         } catch (Exception e) {
-            log.error("COS文件上传失败", e);
+            log.error("OSS文件上传失败", e);
             throw new RuntimeException("文件上传失败：" + e.getMessage());
         }
     }
@@ -47,10 +48,10 @@ public class CosUtil {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(getContentType(originalFilename));
 
-            cosClient.putObject(properties.getBucketName(), fileName, inputStream, metadata);
+            ossClient.putObject(properties.getBucketName(), fileName, inputStream, metadata);
             return getFileUrl(fileName);
         } catch (Exception e) {
-            log.error("COS流式上传失败", e);
+            log.error("OSS流式上传失败", e);
             throw new RuntimeException("文件上传失败");
         }
     }
@@ -59,10 +60,10 @@ public class CosUtil {
     public InputStream download(String objectName) {
         try {
             objectName = trimLeadingSlash(objectName);
-            COSObject cosObject = cosClient.getObject(properties.getBucketName(), objectName);
-            return cosObject.getObjectContent();
+            OSSObject ossObject = ossClient.getObject(properties.getBucketName(), objectName);
+            return ossObject.getObjectContent();
         } catch (Exception e) {
-            log.error("COS文件下载失败", e);
+            log.error("OSS文件下载失败", e);
             throw new RuntimeException("文件下载失败");
         }
     }
@@ -71,32 +72,28 @@ public class CosUtil {
     public void delete(String objectName) {
         try {
             objectName = trimLeadingSlash(objectName);
-            cosClient.deleteObject(properties.getBucketName(), objectName);
-            log.info("COS文件删除成功：{}", objectName);
+            ossClient.deleteObject(properties.getBucketName(), objectName);
+            log.info("OSS文件删除成功：{}", objectName);
         } catch (Exception e) {
-            log.error("COS文件删除失败", e);
+            log.error("OSS文件删除失败", e);
             throw new RuntimeException("文件删除失败");
         }
     }
 
     // ====================== 文件列表 ======================
     public List<String> listObjects(String prefix) {
-        ListObjectsRequest request = new ListObjectsRequest();
-        request.setBucketName(properties.getBucketName());
+        ListObjectsRequest request = new ListObjectsRequest(properties.getBucketName());
         request.setPrefix(prefix);
-        ObjectListing listing = cosClient.listObjects(request);
+        ObjectListing listing = ossClient.listObjects(request);
         return listing.getObjectSummaries().stream()
-                .map(COSObjectSummary::getKey)
+                .map(OSSObjectSummary::getKey)
                 .collect(Collectors.toList());
     }
 
     // ====================== 私有文件临时URL ======================
     public String getTempUrl(String objectName, long expireSeconds) {
         Date expire = new Date(System.currentTimeMillis() + expireSeconds * 1000);
-        GeneratePresignedUrlRequest presignedUrlRequest = new GeneratePresignedUrlRequest(
-                properties.getBucketName(), objectName);
-        presignedUrlRequest.setExpiration(expire);
-        URL url = cosClient.generatePresignedUrl(presignedUrlRequest);
+        URL url = ossClient.generatePresignedUrl(properties.getBucketName(), objectName, expire);
         return url.toString();
     }
 
@@ -116,7 +113,7 @@ public class CosUtil {
     }
 
     private String getFileUrl(String filePath) {
-        return "https://" + properties.getBucketName() + ".cos." + properties.getRegion() + ".myqcloud.com/" + filePath;
+        return "https://" + properties.getBucketName() + "." + properties.getEndpoint() + "/" + filePath;
     }
 
     private String trimLeadingSlash(String path) {
@@ -124,9 +121,8 @@ public class CosUtil {
     }
 
     private String getContentType(String fileName) {
-        return MediaTypeFactory.getMediaType(fileName)
-                .orElse(MediaType.APPLICATION_OCTET_STREAM)
+        return org.springframework.http.MediaTypeFactory.getMediaType(fileName)
+                .orElse(org.springframework.http.MediaType.APPLICATION_OCTET_STREAM)
                 .toString();
     }
-
 }

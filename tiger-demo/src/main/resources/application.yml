@@ -42,3 +42,20 @@ tiger:
     port: 9999
     logPath: /data/applogs/xxl-job/jobhandler
     logRetentionDays: 30
+
+
+aliyun:
+  oss:
+    enabled: true
+    accessKeyId: xxx
+    accessKeySecret: xxx
+    bucketName: xxx
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+
+tencent:
+  cos:
+    enabled: true
+    secretId: xxx
+    secretKey: xxx
+    bucketName: xxx
+    region: ap-beijing
