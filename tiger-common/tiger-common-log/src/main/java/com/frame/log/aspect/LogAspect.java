@@ -26,7 +26,7 @@ public class LogAspect {
         String req = JSON.toJSONString(reqArgs);
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         String methodName = methodSignature.getDeclaringType().getName() + "." + methodSignature.getName();
-        log.info("{},req:{}", methodName, req);
+        log.info("{},request:{}", methodName, req);
         long startTime = System.currentTimeMillis();
         try {
             Object responseObj = pjp.proceed();
