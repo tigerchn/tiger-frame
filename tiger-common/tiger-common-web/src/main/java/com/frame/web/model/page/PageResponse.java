@@ -27,9 +27,6 @@ public class PageResponse<T> {
 
     public void setRecords(List<T> result) {
         this.result = result;
-        if (result != null && !result.isEmpty() && this.total == 0) {
-            setTotal((long) result.size());
-        }
     }
 
     public void setCurrent(Long pageNo) {

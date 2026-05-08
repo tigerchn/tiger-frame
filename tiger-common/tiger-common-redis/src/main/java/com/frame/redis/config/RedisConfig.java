@@ -39,7 +39,7 @@ public class RedisConfig {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
         RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer());
         RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-                .serializeValuesWith(pair).entryTtl(Duration.ofSeconds(10));
+                .serializeValuesWith(pair).entryTtl(Duration.ofMinutes(30));
         return new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
     }
 

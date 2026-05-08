@@ -5,6 +5,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,7 @@ public class RedissonConfig {
      * 创建RedissonClient实例（单机模式，可扩展为集群/哨兵）
      */
     @Bean
+    @ConditionalOnProperty("spring.redis.redisson.address")
     public RedissonClient redissonClient() {
         Config config = new Config();
         // 单机模式配置

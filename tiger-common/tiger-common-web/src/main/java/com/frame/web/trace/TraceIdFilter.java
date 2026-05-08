@@ -20,7 +20,7 @@ public class TraceIdFilter implements Filter {
         try {
             String traceId = httpRequest.getHeader(TraceIdConstant.TRACE_ID);
 
-            if (StringUtils.hasText(traceId)) {
+            if (!StringUtils.hasText(traceId)) {
                 // 生成 traceId
                 traceId = TraceIdContext.generateTraceId();
             }

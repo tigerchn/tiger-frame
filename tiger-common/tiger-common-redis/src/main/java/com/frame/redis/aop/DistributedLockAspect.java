@@ -9,7 +9,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.redisson.RedissonMultiLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.core.DefaultParameterNameDiscoverer;
@@ -38,17 +37,15 @@ public class DistributedLockAspect {
             doRepeatSubmit(lockKey, lock);
         }
 
-        // 2. 选择普通锁 / RedLock
-        RLock finalLock = lock.redLock() ? getRedLock(lockKey) : rLock;
         boolean lockSuccess = false;
 
         try {
             log.info("[分布式锁] 尝试获取锁 key:{}", lockKey);
             // 3. 自动续约模式 / 普通模式
             if (lock.autoRenew()) {
-                lockSuccess = finalLock.tryLock(lock.waitTime(), -1, lock.timeUnit());
+                lockSuccess = rLock.tryLock(lock.waitTime(), -1, lock.timeUnit());
             } else {
-                lockSuccess = finalLock.tryLock(lock.waitTime(), lock.leaseTime(), lock.timeUnit());
+                lockSuccess = rLock.tryLock(lock.waitTime(), lock.leaseTime(), lock.timeUnit());
             }
 
             if (!lockSuccess) {
@@ -61,8 +58,8 @@ public class DistributedLockAspect {
             Thread.currentThread().interrupt();
             throw new ShareLockException("获取锁被中断", e);
         } finally {
-            if (lockSuccess && finalLock.isHeldByCurrentThread()) {
-                finalLock.unlock();
+            if (lockSuccess && rLock.isHeldByCurrentThread()) {
+                rLock.unlock();
                 log.info("[分布式锁] 释放成功 key:{}", lockKey);
             }
         }
@@ -83,16 +80,6 @@ public class DistributedLockAspect {
             Thread.currentThread().interrupt();
             throw new ShareLockException("重复提交校验异常");
         }
-    }
-
-    /**
-     * RedLock 高可用锁（多实例）
-     */
-    private RedissonMultiLock getRedLock(String key) {
-        RLock lock1 = redissonClient.getLock(key + ":redlock:1");
-        RLock lock2 = redissonClient.getLock(key + ":redlock:2");
-        RLock lock3 = redissonClient.getLock(key + ":redlock:3");
-        return new RedissonMultiLock(lock1, lock2, lock3);
     }
 
     /**

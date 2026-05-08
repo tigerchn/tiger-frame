@@ -33,7 +33,7 @@ public class JacksonConfig {
         return jacksonObjectMapperBuilder -> {
             jacksonObjectMapperBuilder.locale(Locale.CHINA);
             jacksonObjectMapperBuilder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-            jacksonObjectMapperBuilder.simpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            jacksonObjectMapperBuilder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
             jacksonObjectMapperBuilder.modules(new JavaTimeModule());
         };
     }
@@ -42,7 +42,7 @@ public class JacksonConfig {
 
         public JavaTimeModule() {
             this.addSerializer(LocalDateTime.class
-                    , new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+                    , new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             this.addSerializer(LocalDate.class
                     , new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             this.addSerializer(LocalTime.class
@@ -50,7 +50,7 @@ public class JacksonConfig {
             this.addDeserializer(LocalDateTime.class
                     , new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             this.addDeserializer(LocalDate.class
-                    , new LocalDateDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+                    , new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             this.addDeserializer(LocalTime.class
                     , new LocalTimeDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
         }

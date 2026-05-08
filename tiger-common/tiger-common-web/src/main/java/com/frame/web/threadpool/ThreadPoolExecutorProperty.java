@@ -6,9 +6,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadPoolExecutorProperty {
 
     private int corePoolSize = 1;
-    private int maxPoolSize = 2147483647;
+    private int maxPoolSize = 200;
     private int keepAliveSeconds = 60;
-    private int queueCapacity = 2147483647;
+    private int queueCapacity = 1000;
     private boolean allowCoreThreadTimeOut = false;
     private boolean waitForTasksToCompleteOnShutdown = false;
     private int awaitTerminationSeconds = 0;

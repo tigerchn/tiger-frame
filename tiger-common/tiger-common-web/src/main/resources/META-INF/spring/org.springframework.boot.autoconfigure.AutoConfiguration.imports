@@ -1,1 +1,5 @@
+com.frame.web.config.JacksonConfig
+com.frame.web.config.CorsConfig
+com.frame.web.config.FilterConfig
+com.frame.web.interceptor.InterceptorConfig
 com.frame.web.threadpool.ThreadPoolExecutorAutoConfig

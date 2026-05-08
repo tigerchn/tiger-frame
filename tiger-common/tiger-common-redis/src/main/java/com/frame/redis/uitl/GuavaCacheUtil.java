@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GuavaCacheUtil<K, V> {
+public class GuavaCacheUtil {
 
     @Resource
     public RedisUtil redisUtil;
@@ -29,7 +29,7 @@ public class GuavaCacheUtil<K, V> {
                     .expireAfterWrite(3, TimeUnit.SECONDS)
                     .build();
 
-    public Map<K, V> getResult(List<K> idList, String cacheKeyPrefix, String cacheSuffix, Class<V> clazz,
+    public <K, V> Map<K, V> getResult(List<K> idList, String cacheKeyPrefix, String cacheSuffix, Class<V> clazz,
                                Function<List<K>, Map<K, V>> function) {
         if (CollectionUtils.isEmpty(idList)) {
             return Collections.emptyMap();
