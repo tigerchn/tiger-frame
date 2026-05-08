@@ -26,6 +26,7 @@
         <module>tiger-common-job</module>
         <module>tiger-common-mq</module>
         <module>tiger-common-test</module>
+        <module>tiger-common-websocket</module>
     </modules>
 
     <properties>
