@@ -12,12 +12,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Collections;
 
 @RestController
@@ -97,7 +95,7 @@ public class DemoController {
                     @ApiResponse(responseCode = "500", description = "邮件发送失败")
             }
     )
-    public String sendEmail()  {
+    public String sendEmail() {
         MailMessage mailMessage = MailMessage.builder()
                 .receiver("liuxmchn@sina.com")
                 .subject("测试邮件")

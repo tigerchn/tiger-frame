@@ -66,6 +66,36 @@
                 <artifactId>tiger-common-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-tool</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-job</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-mail</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>tiger-common-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
