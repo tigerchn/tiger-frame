@@ -1,4 +1,4 @@
-package com.frame.tool;
+package com.frame.tool.encode;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

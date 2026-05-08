@@ -2,7 +2,7 @@ package com.frame.web.interceptor;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONPath;
-import com.frame.tool.EncodeUtils;
+import com.frame.tool.encode.EncodeUtils;
 import com.frame.web.annotation.ResultEncrypt;
 import com.frame.web.model.result.Result;
 import lombok.extern.slf4j.Slf4j;
