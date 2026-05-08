@@ -21,6 +21,7 @@
         <module>tiger-common-log</module>
         <module>tiger-common-knife4j</module>
         <module>tiger-common-web</module>
+        <module>tiger-common-tool</module>
     </modules>
 
     <properties>
