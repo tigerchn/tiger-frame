@@ -22,6 +22,7 @@
         <module>tiger-common-knife4j</module>
         <module>tiger-common-web</module>
         <module>tiger-common-tool</module>
+        <module>tiger-common-mail</module>
     </modules>
 
     <properties>
