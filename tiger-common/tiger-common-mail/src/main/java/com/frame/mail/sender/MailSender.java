@@ -20,36 +20,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Properties;
 
-
-/**
- * 邮件发送工具,使用时注入即可,使用示例:
- *
- * <pre>{@code
- *  @Service
- * public class MailSendTest {
- *   private final MailSender mailSender;
- *   public MailSendTest(MailSender mailSender){
- *      this.mailSender = mailSender;
- *   }
- *   public void send() {
- *         final MailMessage mailMessage = MailMessage.builder()
- *                 .receiver("xxx@qq.com")
- *                 .subject("测试邮件主题")
- *                 .content("测试邮件内容")
- *                 .annexFiles(Collections.singletonList(new MailMessage.AnnexFileInfo("测试附件.txt", "Hello World".getBytes())))
- *                 .build();
- *         try {
- *             mailSender.sendEmail(mailMessage);
- *         } catch (MessagingException | IOException e) {
- *             // 异常
- *             throw new RuntimeException(e);
- *         }
- *     }
- * }
- * }</pre>
- *
- * @since 2023/6/11
- */
 @Component
 @RequiredArgsConstructor
 public class MailSender {
@@ -63,13 +33,14 @@ public class MailSender {
      *
      * @param mailMessage 邮件内容信息
      */
-    public void sendEmail(MailMessage mailMessage) throws MessagingException, IOException {
+    public void sendEmail(MailMessage mailMessage) {
         // 创建MineMessage,配置各项参数
         final Properties mailProperties = buildEmailProperties();
         final Session session = Session.getInstance(mailProperties);
-        final MimeMessage message = this.buildEmailMsg(session, mailMessage);
+
         // 连接SMTP服务器
         try {
+            final MimeMessage message = this.buildEmailMsg(session, mailMessage);
             Transport transport = session.getTransport();
             transport.connect(mailConfig.getSmtpUser(), mailConfig.getSmtpPwd());
             // 调用发送接口

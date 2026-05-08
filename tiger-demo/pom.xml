@@ -36,6 +36,12 @@
             <artifactId>tiger-common-log</artifactId>
             <version>${tiger.common.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>tiger-common-mail</artifactId>
+            <version>${tiger.common.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

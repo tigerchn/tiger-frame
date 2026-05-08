@@ -51,6 +51,7 @@
         <oss.version>3.17.4</oss.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version> <!-- SpringBoot3使用jakarta.validation -->
         <jakarta.mail.version>2.0.1</jakarta.mail.version> <!-- jakarta.mail 替代 javax.mail -->
+        <angus.activation.version>2.0.2</angus.activation.version>
         <rocketmq.version>3.0.1</rocketmq.version> <!-- 官方兼容SpringBoot3 -->
         <rabbitmq.version>3.2.5</rabbitmq.version>
         <mongodb.version>4.1.1</mongodb.version>
@@ -238,6 +239,11 @@
                 <groupId>com.sun.mail</groupId>
                 <artifactId>jakarta.mail</artifactId>
                 <version>${jakarta.mail.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.angus</groupId>
+                <artifactId>angus-activation</artifactId>
+                <version>${angus.activation.version}</version>
             </dependency>
 
             <!-- 阿里云OSS -->

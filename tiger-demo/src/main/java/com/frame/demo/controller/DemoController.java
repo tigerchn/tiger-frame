@@ -3,6 +3,8 @@ package com.frame.demo.controller;
 import com.frame.demo.model.LoginResponse;
 import com.frame.demo.model.RegisterRequest;
 import com.frame.demo.model.UserInfoResponse;
+import com.frame.mail.message.MailMessage;
+import com.frame.mail.sender.MailSender;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -10,13 +12,21 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/demo")
 @Tag(name = "示例模块", description = "示例接口")
+@RequiredArgsConstructor
 public class DemoController {
+
+    private final MailSender mailSender;
 
     /**
      * 用户登录接口
@@ -76,5 +86,28 @@ public class DemoController {
     public String register(@Valid @RequestBody RegisterRequest request) {
         // 业务逻辑...
         return "注册成功";
+    }
+
+    @GetMapping("/sendEmail")
+    @Operation(
+            summary = "发送邮件",
+            description = "发送邮件",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "邮件发送成功"),
+                    @ApiResponse(responseCode = "500", description = "邮件发送失败")
+            }
+    )
+    public String sendEmail()  {
+        MailMessage mailMessage = MailMessage.builder()
+                .receiver("liuxmchn@sina.com")
+                .subject("测试邮件")
+                .content("这是一封测试邮件")
+                .annexFiles(Collections.singletonList(new MailMessage.AnnexFileInfo("test.txt", "hello send mail".getBytes())))
+                .build();
+
+        mailSender.sendEmail(mailMessage);
+
+        // 业务逻辑...
+        return "邮件发送成功";
     }
 }

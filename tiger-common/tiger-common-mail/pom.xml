@@ -28,6 +28,11 @@
             <groupId>com.frame</groupId>
             <artifactId>tiger-common-log</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>angus-activation</artifactId>
+        </dependency>
     </dependencies>
 
 

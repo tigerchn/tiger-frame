@@ -14,43 +14,43 @@ public class MailConfig {
     /**
      * 邮件服务的地址
      */
-    @Value("${ape.smtpHost}")
+    @Value("${tiger.smtpHost}")
     private String smtpHost;
 
     /**
      * 邮件服务的协议
      */
-    @Value("${ape.smtpProtocol:smtp}")
+    @Value("${tiger.smtpProtocol:smtp}")
     private String smtpProtocol = "smtp";
 
     /**
      * 邮件服务的端口
      */
-    @Value("${ape.smtpPort}")
+    @Value("${tiger.smtpPort}")
     private Integer smtpPort;
 
     /**
      * 邮件发送人的账号
      */
-    @Value("${ape.smtpUser}")
+    @Value("${tiger.smtpUser}")
     private String smtpUser;
 
     /**
      * 邮件发送人的密码
      */
-    @Value("${ape.smtpPwd}")
+    @Value("${tiger.smtpPwd}")
     private String smtpPwd;
 
     /**
      * 是否启用ssl传输
      */
-    @Value("${ape.smtpSslEnable:false}")
+    @Value("${tiger.smtpSslEnable:false}")
     private Boolean smtpSslEnable = true;
 
     /**
      * 邮件发送人的名字
      */
-    @Value("${ape.senderName}")
+    @Value("${tiger.senderName}")
     private String senderName;
 
 }

@@ -24,3 +24,11 @@ springdoc:
   api-docs:
     path: /v3/api-docs
   paths-to-exclude: /actuator/**, /error/**
+
+tiger:
+  smtpHost: smtp.mxhichina.com
+  smtpPort: 465
+  smtpUser:
+  smtpPwd:
+  senderName: tiger
+  smtpSslEnable: true
