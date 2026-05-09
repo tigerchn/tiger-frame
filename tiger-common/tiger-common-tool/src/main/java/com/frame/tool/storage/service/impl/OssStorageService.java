@@ -1,9 +1,10 @@
-package com.frame.tool.storage.oss;
+package com.frame.tool.storage.service.impl;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
-import com.frame.tool.storage.StorageService;
-import com.frame.tool.storage.oss.properties.OssProperties;
+import com.frame.tool.date.DateObscureUtil;
+import com.frame.tool.storage.service.StorageService;
+import com.frame.tool.storage.properties.oss.OssProperties;
 import com.frame.tool.uuid.IdUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -101,7 +102,7 @@ public class OssStorageService implements StorageService {
     private String generateFilePath(String originalFilename) {
         String uuid = IdUtil.simpleId();
         String ext = getFileExtension(originalFilename);
-        String datePath = java.time.LocalDate.now().toString();
+        String datePath = DateObscureUtil.nowToObscureHex();
         return datePath + "/" + uuid + ext;
     }
 

@@ -5,6 +5,8 @@ import com.frame.demo.model.RegisterRequest;
 import com.frame.demo.model.UserInfoResponse;
 import com.frame.mail.message.MailMessage;
 import com.frame.mail.sender.MailSender;
+import com.frame.tool.storage.service.StorageService;
+import com.frame.web.model.result.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -15,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 
@@ -25,6 +28,7 @@ import java.util.Collections;
 public class DemoController {
 
     private final MailSender mailSender;
+    private final StorageService storageService;
 
     /**
      * 用户登录接口
@@ -108,4 +112,28 @@ public class DemoController {
         // 业务逻辑...
         return "邮件发送成功";
     }
+
+    /**
+     * 图片上传接口（COS/OSS 二选一）
+     */
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    @Operation(
+            summary = "文件上传",
+            description = "上传图片或文件到云存储，返回访问URL",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "上传成功"),
+                    @ApiResponse(responseCode = "400", description = "文件为空"),
+                    @ApiResponse(responseCode = "500", description = "上传失败")
+            }
+    )
+    public Result<String> upload(
+            @Parameter(description = "待上传的文件", required = true)
+            @RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("上传文件不能为空");
+        }
+        String url = storageService.upload(file);
+        return Result.success(url);
+    }
+
 }

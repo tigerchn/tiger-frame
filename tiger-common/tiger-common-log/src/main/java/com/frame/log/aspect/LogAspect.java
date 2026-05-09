@@ -9,6 +9,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 
 @Aspect
 @Slf4j
@@ -23,10 +28,26 @@ public class LogAspect {
     @Around("pointCut()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         Object[] reqArgs = pjp.getArgs();
-        String req = JSON.toJSONString(reqArgs);
+
+        // 附件处理
+        Object[] logArgs = Arrays.stream(reqArgs).map(arg -> {
+            if (arg instanceof MultipartFile file) {
+                return Map.of(
+                        "originalFilename", Objects.requireNonNull(file.getOriginalFilename()),
+                        "size", file.getSize(),
+                        "contentType", Objects.requireNonNull(file.getContentType())
+                );
+            }
+            return arg;
+        }).toArray();
+
+
+        String req = JSON.toJSONString(logArgs);
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         String methodName = methodSignature.getDeclaringType().getName() + "." + methodSignature.getName();
         log.info("{},request:{}", methodName, req);
+
+
         long startTime = System.currentTimeMillis();
         try {
             Object responseObj = pjp.proceed();

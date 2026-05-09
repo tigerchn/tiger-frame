@@ -11,5 +11,4 @@ public class IdUtil {
     public static String commonId() {
         return UUID.randomUUID().toString();
     }
-
 }

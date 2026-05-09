@@ -1,4 +1,4 @@
-package com.frame.tool.storage.oss.properties;
+package com.frame.tool.storage.properties.oss;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

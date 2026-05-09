@@ -1,11 +1,11 @@
-package com.frame.tool.storage.cos.config;
+package com.frame.tool.storage.config.cos;
 
+import com.frame.tool.storage.properties.cos.CosProperties;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.region.Region;
-import com.frame.tool.storage.cos.properties.CosProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

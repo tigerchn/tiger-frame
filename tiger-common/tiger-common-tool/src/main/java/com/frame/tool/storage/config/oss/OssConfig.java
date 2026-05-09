@@ -1,8 +1,8 @@
-package com.frame.tool.storage.oss.config;
+package com.frame.tool.storage.config.oss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.frame.tool.storage.oss.properties.OssProperties;
+import com.frame.tool.storage.properties.oss.OssProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

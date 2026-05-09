@@ -1,7 +1,8 @@
-package com.frame.tool.storage.cos;
+package com.frame.tool.storage.service.impl;
 
-import com.frame.tool.storage.StorageService;
-import com.frame.tool.storage.cos.properties.CosProperties;
+import com.frame.tool.date.DateObscureUtil;
+import com.frame.tool.storage.service.StorageService;
+import com.frame.tool.storage.properties.cos.CosProperties;
 import com.frame.tool.uuid.IdUtil;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.*;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -107,7 +109,7 @@ public class CosStorageService implements StorageService {
     private String generateFilePath(String originalFilename) {
         String uuid = IdUtil.simpleId();
         String ext = getFileExtension(originalFilename);
-        String datePath = java.time.LocalDate.now().toString();
+        String datePath = DateObscureUtil.nowToObscureHex();
         return datePath + "/" + uuid + ext;
     }
 
