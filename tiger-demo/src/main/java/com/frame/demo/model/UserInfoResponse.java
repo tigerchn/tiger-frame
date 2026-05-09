@@ -4,12 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "用户信息响应")
 public class UserInfoResponse {
+
     @Schema(description = "用户ID", example = "1001")
     private Long userId;
+
     @Schema(description = "用户名", example = "admin")
     private String username;
+
     @Schema(description = "手机号", example = "13800138000")
     private String phone;
+
     @Schema(description = "邮箱", example = "admin@xxx.com")
     private String email;
 

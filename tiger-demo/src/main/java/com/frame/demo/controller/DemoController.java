@@ -68,9 +68,10 @@ public class DemoController {
             }
     )
     @Parameter(name = "userId", description = "用户ID", required = true, example = "1001")
-    public UserInfoResponse getUserInfo(@PathVariable Long userId) {
+    public Result<UserInfoResponse> getUserInfo(@PathVariable Long userId) {
         // 业务逻辑...
-        return new UserInfoResponse(userId, "admin", "13800138000", "admin@xxx.com");
+        UserInfoResponse response =new UserInfoResponse(userId, "admin", "13800138000", "admin@xxx.com");
+        return Result.success(response);
     }
 
     /**
